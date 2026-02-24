@@ -1,0 +1,99 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/jellycat/jellycat-detail.css' %}" />
+{% endblock %} 
+{% block content %}
+<section class="jellycat-container">
+  </div>
+  <div class="jellycat-details">
+    <h1>{{ jellycat.name }}</h1>
+    {% if jellycat.age > 0 %}
+      <h2>A {{ jellycat.age }} year old {{ jellycat.type}}</h2>
+    {% else %}
+      <h2>A {{ jellycat.type }} </h2>
+    {% endif %}
+    <p>{{ cat.description }}</p>
+
+    <div class="jellycat-actions">
+      <a href="{% url "jellycat-update" jellycat.id %}" class='btn warn'>Edit</a>
+      <a href="{% url "jellycat-delete" jellycat.id %}" class="btn danger">Delete</a>
+    </div>
+  </div>
+</section>
+<div class="accessories-container">
+  <section class="accessories">
+    <div class="subsection-title">
+      <h2>Accessories</h2>
+    </div>
+    <h3>Add an accessory</h3>
+    <form action="{% url "add-accessory" cat.id %}" method="post" class="subsection-content" autocomplete="off">
+      {% csrf_token %}
+      {{ accessory_form.as_p }}
+      <button type="submit" class="btn submit">Add Accessory</button>
+    </form>
+    <h3>Past Accessories</h3>
+    {% if cat.accessory_set.all.count %}
+    <table>
+      <thead>
+          <th>Date</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for accessory in cat.accessory_set.all %}
+          <td>{{accessory.date}}</td>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+    <div class="subsection-content">
+      <p> {{jellycat.name}} has not been given any accessories!</p>
+    </div>
+    {% endif %}
+  </section>
+  <section class="toys">
+    <div class="subsection-title">
+      <h2>Accessories</h2>
+      <img src="{% static 'images/string.svg' %}" alt="A ball of string" />
+      <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
+      <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
+    </div>
+    <h3>{{ cat.name }}'s Accessories</h3>
+    <div class="subsection-content">
+      {% if <cat class="accessories"></cat>.count %} 
+        {% for accessories in cat.accessories.all %}
+          <div class="accessory-container">
+            <div class="color-block" style="background-color: {{ accessory.color }}"></div>
+            <a href="{% url 'acc-detail' accessory.id %}">
+              <p>A {{ accessory.color }} {{ accessory.name }}</p>
+              <form action="{% url 'remove-accessory' cat.id accessory.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Remove Accessory</button>
+              </form>
+            </a>
+          </div>
+        {% endfor %} 
+      {% else %}
+        <p class="no-accessories">{{cat.name}} doesn't have any accessories!</p>
+      {% endif %}
+    </div>
+    <h3>Available Accessories</h3>
+    <div class="subsection-content">
+      {% if accessories.count %}
+      {% for accessory in accessories %}
+      <div class="accessory-container">
+        <div class="color-block" style="background-color: {{ accessory.color }}"></div>
+        <p>{{ accessory.color }} {{ accessory.name }}</p>
+        <form action="{% url "associate-accessory" cat.id accessory.id %}" method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn submit">Give Accessory</button>
+        </form>
+      </div>
+      {% endfor %}
+      {% else %}
+      <p class="all-accessories">{{cat.name}} already has all the available accessories!</p>
+      {% endif %}
+    </div>
+  </section>
+</div>
+{% endblock %}
