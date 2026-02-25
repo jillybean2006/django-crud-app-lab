@@ -6,7 +6,7 @@ from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
-from .models import jellycat, accessory
+from .models import Jellycat, Accessory
 from .forms import FeedingForm
 
 
@@ -49,10 +49,6 @@ class JellycatUpdate(LoginRequiredMixin, UpdateView):
 class JellycatDelete(LoginRequiredMixin, DeleteView):
     model = jellycat
     success_url = '/jellycats/'
-
-@login_required
-
-    return redirect('jellycat-detail', jellycat_id=jellycat_id)
 
 class AccessoryCreate(LoginRequiredMixin, CreateView):
     model = Accessory

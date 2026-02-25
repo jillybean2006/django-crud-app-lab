@@ -1,10 +1,10 @@
 from django import forms
-from .models import accessory
+from .models import Accessory
 
-class Accessory(forms.ModelForm):
+class AccessoryForm(forms.ModelForm):
     class Meta:
-        model = accessory
-        fields = ['date']
+        model = Accessory
+        fields = '__all__'
         widgets = {
             'date': forms.DateInput(
                 format=('%Y-%m-%d'),

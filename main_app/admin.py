@@ -1,6 +1,6 @@
 from django.contrib import admin
-from .models import jellycat, accessory
+from .models import Jellycat, Accessory
 
 
-admin.site.register(jellycat)
-admin.site.register(accessory)
+admin.site.register(Jellycat)
+admin.site.register(Accessory)
