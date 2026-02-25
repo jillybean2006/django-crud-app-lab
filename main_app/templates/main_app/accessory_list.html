@@ -1,0 +1,26 @@
+{% extends 'base.html' %} 
+{% load static %} 
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/accessories/accessory-index.css' %}" />
+{% endblock %} 
+{% block content %}
+
+<section class="page-header">
+  <h1>All jellycat Accessories</h1>
+  
+</section>
+
+<section class="card-container">
+  {% for accessory in accessory_list %}
+    <div class="card" style="border-color: {{ accessory.color }}">
+      <div class="card-bg" style="background-color: {{ accessory.color }}"></div>
+      <a href="{% url 'accessory-detail' accessory.id %}">
+        <div class="card-content">
+          <h2>{{ accessory.name }}</h2>
+          <p>A {{ accessory.color }} accessory</p>
+        </div>
+      </a>
+    </div>
+  {% endfor %}
+</section>
+{% endblock %}
