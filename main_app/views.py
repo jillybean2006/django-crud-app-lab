@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from .models import Jellycat, Accessory
-from .forms import FeedingForm
+from .forms import AccessoryForm
 
 
 class Home(LoginView):
@@ -19,13 +19,13 @@ def about(request):
 @login_required
 def jellycat_index(request):
    
-    jellycats = jellycat.objects.filter(user=request.user)
-    return render(request, 'jellycats/index.html', {'jellycats': jellycats})
+    Jellycats = Jellycat.objects.filter(user=request.user)
+    return render(request, 'jellycats/index.html', {'jellycats': Jellycats})
 
 @login_required
 def jellycat_detail(request, jellycat_id):
-    jellycat_instance = jellycat.objects.get(id=jellycat_id)
-    accessories_jellycat_doesnt_have = accessory.objects.exclude(id__in = jellycat_instance.accessories.all().values_list('id'))
+    jellycat_instance = Jellycat.objects.get(id=jellycat_id)
+    accessories_jellycat_doesnt_have = Accessory.objects.exclude(id__in = jellycat_instance.accessories.all().values_list('id'))
     feeding_form = FeedingForm()
     return render(request, 'jellycats/detail.html', {
         'jellycat': jellycat_instance,
@@ -33,8 +33,8 @@ def jellycat_detail(request, jellycat_id):
         })
 
 class JellycatCreate(LoginRequiredMixin, CreateView):
-    model = jellycat
-    fields = ['name', 'breed', 'description', 'age']
+    model = Jellycat
+    fields = ['name', 'type', 'description', 'age']
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -43,11 +43,11 @@ class JellycatCreate(LoginRequiredMixin, CreateView):
     success_url = '/jellycats/'
 
 class JellycatUpdate(LoginRequiredMixin, UpdateView):
-    model = jellycat    
+    model = Jellycat    
     fields = ['type', 'description', 'age']
 
 class JellycatDelete(LoginRequiredMixin, DeleteView):
-    model = jellycat
+    model = Jellycat
     success_url = '/jellycats/'
 
 class AccessoryCreate(LoginRequiredMixin, CreateView):
@@ -93,5 +93,5 @@ def signup(request):
 
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
-    return render(request, 'signup.html', context)
+    return render(request, 'main_app/signup.html', context)
     

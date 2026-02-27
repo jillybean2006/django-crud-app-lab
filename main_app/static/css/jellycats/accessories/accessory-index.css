@@ -1,0 +1,6 @@
+.acc-grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap:14px;
+}
+.acc-grid .card{ background: linear-gradient(white, honeydew); }

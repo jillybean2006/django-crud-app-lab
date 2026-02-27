@@ -1,0 +1,63 @@
+
+:root{
+  --bg: mistyrose;
+  --bg2: seashell;
+  --card: white;
+  --ink: midnightblue;
+  --muted: slategray;
+
+  --pink: hotpink;
+  --mint: honeydew;
+  --sky: aliceblue;
+  --butter: lemonchiffon;
+
+  --border: gainsboro;
+  --shadow: 0 12px 28px lightgray;
+  --r: 18px;
+
+  --font: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
+}
+
+*{ box-sizing:border-box; }
+body{
+  margin:0; font-family:var(--font); color:var(--ink);
+  background:
+    radial-gradient(circle at 15% 0%, var(--pink), transparent 55%),
+    radial-gradient(circle at 85% 0%, palegreen, transparent 55%),
+    radial-gradient(circle at 50% 100%, lightskyblue, transparent 60%),
+    linear-gradient(var(--bg), var(--bg2));
+}
+
+main,.container{ width:min(1050px, calc(100% - 40px)); margin:28px auto; }
+
+
+nav{
+  width:min(1050px, calc(100% - 40px)); margin:18px auto 0;
+  background: white; border:1px solid var(--border); border-radius:999px;
+  box-shadow: var(--shadow);
+  padding:10px 14px;
+  display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+}
+nav a{ padding:10px 12px; border-radius:999px; font-weight:800; text-decoration:none; }
+nav a:hover{ background: var(--sky); }
+
+
+.card{
+  background:var(--card); border:1px solid var(--border);
+  border-radius:var(--r); box-shadow:var(--shadow); padding:16px;
+}
+
+button,.btn,input[type="submit"],a.button{
+  border:1px solid var(--border); border-radius:999px;
+  padding:10px 14px; font-weight:900; cursor:pointer;
+  background: linear-gradient(white, var(--butter));
+  box-shadow: 0 10px 16px lightgray;
+  color:var(--ink); text-decoration:none;
+}
+button:hover,.btn:hover,input[type="submit"]:hover,a.button:hover{ transform: translateY(-1px); }
+
+input,select,textarea{
+  width:100%; padding:12px 14px; border-radius:14px;
+  border:1px solid var(--border); background:white;
+}
+p{ color:var(--muted); }

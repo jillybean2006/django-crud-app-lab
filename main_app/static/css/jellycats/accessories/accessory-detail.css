@@ -1,0 +1,8 @@
+.acc-detail{
+  display:flex;
+  gap:16px;
+  align-items:flex-start;
+  flex-wrap:wrap;
+}
+.acc-detail .card{ border-style:dashed; }
+.acc-detail h2::before{ content:"🔑 "; }

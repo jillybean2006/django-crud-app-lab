@@ -13,11 +13,11 @@
     {% else %}
       <h2>A {{ jellycat.type }} </h2>
     {% endif %}
-    <p>{{ cat.description }}</p>
+    <p>{{ jellycat.description }}</p>
 
     <div class="jellycat-actions">
-      <a href="{% url "jellycat-update" jellycat.id %}" class='btn warn'>Edit</a>
-      <a href="{% url "jellycat-delete" jellycat.id %}" class="btn danger">Delete</a>
+      <a href='{% url "jellycat-update" jellycat.id %}' class='btn warn'>Edit</a>
+      <a href='{% url "jellycat-delete" jellycat.id %}' class="btn danger">Delete</a>
     </div>
   </div>
 </section>
@@ -33,14 +33,14 @@
       <button type="submit" class="btn submit">Add Accessory</button>
     </form>
     <h3>Past Accessories</h3>
-    {% if cat.accessory_set.all.count %}
+    {% if jellycat.accessory_set.all.count %}
     <table>
       <thead>
           <th>Date</th>
         </tr>
       </thead>
       <tbody>
-        {% for accessory in cat.accessory_set.all %}
+        {% for accessory in jellycat.accessory_set.all %}
           <td>{{accessory.date}}</td>
         {% endfor %}
       </tbody>
@@ -58,15 +58,15 @@
       <img src="{% static 'images/mouse.svg' %}" alt="A mouse" />
       <img src="{% static 'images/fish.svg' %}" alt="A fishy toy" />
     </div>
-    <h3>{{ cat.name }}'s Accessories</h3>
+    <h3>{{ jellycat.name }}'s Accessories</h3>
     <div class="subsection-content">
-      {% if <cat class="accessories"></cat>.count %} 
-        {% for accessories in cat.accessories.all %}
+      {% if jellycat.accessory_set.all.count %} 
+        {% for accessory in jellycat.accessory_set.all %}
           <div class="accessory-container">
             <div class="color-block" style="background-color: {{ accessory.color }}"></div>
             <a href="{% url 'acc-detail' accessory.id %}">
               <p>A {{ accessory.color }} {{ accessory.name }}</p>
-              <form action="{% url 'remove-accessory' cat.id accessory.id %}" method="post">
+              <form action="{% url 'remove-accessory' jellycat.id accessory.id %}" method="post">
                 {% csrf_token %}
                 <button type="submit" class="btn btn-danger">Remove Accessory</button>
               </form>
@@ -74,7 +74,7 @@
           </div>
         {% endfor %} 
       {% else %}
-        <p class="no-accessories">{{cat.name}} doesn't have any accessories!</p>
+        <p class="no-accessories">{{jellycat.name}} doesn't have any accessories!</p>
       {% endif %}
     </div>
     <h3>Available Accessories</h3>
@@ -84,14 +84,14 @@
       <div class="accessory-container">
         <div class="color-block" style="background-color: {{ accessory.color }}"></div>
         <p>{{ accessory.color }} {{ accessory.name }}</p>
-        <form action="{% url "associate-accessory" cat.id accessory.id %}" method="post">
+        <form action='{% url "associate-accessory" jellycat.id accessory.id %}' method="post">
           {% csrf_token %}
           <button type="submit" class="btn submit">Give Accessory</button>
         </form>
       </div>
       {% endfor %}
       {% else %}
-      <p class="all-accessories">{{cat.name}} already has all the available accessories!</p>
+      <p class="all-accessories">{{jellycat.name}} already has all the available accessories!</p>
       {% endif %}
     </div>
   </section>
