@@ -16,5 +16,5 @@ urlpatterns = [
     path('accessories/<int:pk>/delete', views.AccessoryDelete.as_view(), name="accessory-delete"),
     path('jellycats/<int:jellycat_id>/associate-accessory/<int:accessory_id>', views.associate_accessory, name='associate-accessory'),
     path('jellycats/<int:jellycat_id>/remove-accessory/<int:accessory_id>/', views.remove_accessory, name='remove-accessory '),
-    path('accounts/signup/', views.signup, name='signup')
+    path("accounts/signup/", views.signup, name="signup"),
 ]
